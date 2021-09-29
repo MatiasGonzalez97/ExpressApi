@@ -1,9 +1,20 @@
+const usuario = require('./routes/usuarios');
 const express = require('express');
 const mongoose  = require('mongoose');
 const app = express();
 
+
+
 const port = process.env.PORT || 3000;
 
+
+app.use(express.json());
+app.use(express.urlencoded({extended:true}));
+app.use('/api/usuarios',usuario);
+
+console.log(app._router.stack);
+
+app.get('/',(req, res ) => {res.send('Hola')});
 
 //Conection BD
 mongoose.connect('mongodb://localhost:27017/course_track',{useNewUrlParser : true, useUnifiedTopology : true})
